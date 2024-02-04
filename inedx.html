@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf8'>
+	<title></title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
+<script type="text/javascript">
+	let canvas = document.getElementById('canvas');
+	let ctx = canvas.getContext('2d');
+	
+	let obs = {
+
+		x:50,
+		y:50,
+		newx:2,
+		newy:7,
+		color:'red',
+		draw: function(){
+		ctx.fillStyle = this.color;
+		ctx.fillRect(this.x,this.y,20,20)
+	}};
+
+	function update()
+	{
+	
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		obs.draw();
+		obs.x += obs.newx;
+		obs.y += obs.newy;
+
+if (obs.y + obs.newy > canvas.height || obs.y + obs.newy < 0) {
+    obs.newy = -obs.newy;
+    
+    obs.color= 'rgb('+
+      Math.floor(Math.random()*256)+','+
+      Math.floor(Math.random()*256)+','+
+      Math.floor(Math.random()*256)+')';
+  }
+if (obs.x + obs.newx > canvas.width || obs.x + obs.newx < 0) {
+    obs.newx = -obs.newx;
+  
+    obs.color= 'rgb('+
+      Math.floor(Math.random()*256)+','+
+      Math.floor(Math.random()*256)+','+
+      Math.floor(Math.random()*256)+')';
+  }
+	}
+
+	setInterval(update,20);
+
+	obs.draw();
+
+	
+</script>
+	
+</body>
+</html>
